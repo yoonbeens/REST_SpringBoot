@@ -20,20 +20,22 @@ import lombok.RequiredArgsConstructor;
 public class HelloController {
 	
     @GetMapping("/hello")
-    @ResponseBody //@Controller일 때 주석 처리 시 500
+//    @ResponseBody //@Controller일 때 주석 처리 시 500
 //  @RequestBody가 JSON을 Entity로 자동으로 바꿔준다(이게 DI다)
     public String hello() {
-        return "Hello World Spring boot";
+    	//index.html 부르기
+        return "index";
     }
     
     
     //@Autowired와 User user = new user;을 할 필요가 없다
-    //@RAC아노테이션과 UserRepository으로 알아서 해준다
+    //@RAC아노테이션과 이 UserRepository가 알아서 해준다
     private final UserRepository userRepository;
     
     @GetMapping("/list")
     public String list(Model model) {
     	List<User> userList = this.userRepository.findAll();
+    	//model.addAttribute("파라미터이름", 보낼객체);
     	model.addAttribute("userList", userList);
     	return "user_list";
   }
@@ -47,6 +49,7 @@ public class HelloController {
     	System.out.println(id);
     	
     	//모델과 타임리프 없이도 @ResponseBody가 있으면 바로 넘길 수 있다
+    	//html과 연동할 땐 모델 필요
     	return String.format("%d", id);
   }
     
@@ -71,14 +74,25 @@ public class HelloController {
 
     	return "user_list";
   }
+    //return json
+//    @PostMapping("/userdb/create")
+//    @ResponseBody
+//    public User create_userdb(@RequestBody User newUser) {
+//    
+//    	User created_user = this.userRepository.save(newUser);
+//    	System.out.println(created_user);
+//    	return created_user;
+//    }
+    
     
     @PostMapping("/userdb/create")
-    @ResponseBody
-    public String create_userdb(@RequestBody User newUser) {
+//    @ResponseBody
+    public String create_userdb(Model model, @RequestBody User newUser) {
     
     	User created_user = this.userRepository.save(newUser);
-
-    	return "created_user";
+    	model.addAttribute("user_obj", created_user);
+    	System.out.println(created_user);
+    	return "index";
     }
     
     

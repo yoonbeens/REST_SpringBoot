@@ -14,6 +14,7 @@ import lombok.Setter;
 public class User {
 	
 	@Id
+	//SQL 오토 인크리먼트를 해줌
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
