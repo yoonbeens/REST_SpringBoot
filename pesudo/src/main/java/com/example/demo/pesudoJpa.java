@@ -102,7 +102,8 @@ public class pesudoJpa {
 		UserEntity userEntity = new UserEntity();
 		 
 		userDTO.setName("richard");
-		userDTO.setEmail("richard@gmail.com");
+		userDTO.setEmail("richard@gmail.com")
+		;
 		
 		
 		UserRepo userRepo = new UserRepoImpl(userEntity);

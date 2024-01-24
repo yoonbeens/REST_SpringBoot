@@ -70,7 +70,6 @@ class UserDAOImpl_D implements UserDAO_D {
 public class pseudoJpaDefault {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		UserDTO_D userDTO = new UserDTO_D();
 //		UserEntity_D userEntity = new UserEntity_D();
 		 
